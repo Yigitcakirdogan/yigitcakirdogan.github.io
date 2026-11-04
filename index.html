@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Yiğit Çakırdoğan | Embedded Systems &amp; Functional Safety Architecture Portal</title>
+  <style>
+    :root {
+      --bg: #0b0f17;
+      --panel: #111827;
+      --panel-border: #1f2937;
+      --text: #e5e7eb;
+      --muted: #9ca3af;
+      --accent: #38bdf8;
+      --green: #10b981;
+      --amber: #f59e0b;
+      --red: #ef4444;
+      --mono: 'JetBrains Mono', 'Fira Code', 'Consolas', monospace;
+      --sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--sans);
+      line-height: 1.6;
+      padding-bottom: 4rem;
+    }
+    header {
+      border-bottom: 1px solid var(--panel-border);
+      background: linear-gradient(180deg, #0f172a 0%, #0b0f17 100%);
+      padding: 3rem 1.5rem 2.5rem;
+      text-align: center;
+    }
+    .badge-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      justify-content: center;
+      margin-bottom: 1rem;
+    }
+    .pill {
+      font-family: var(--mono);
+      font-size: 0.75rem;
+      padding: 0.25rem 0.65rem;
+      border-radius: 999px;
+      border: 1px solid #334155;
+      background: #1e293b;
+      color: var(--accent);
+    }
+    .pill.safety { color: #f87171; border-color: #7f1d1d; background: #2a1215; }
+    .pill.pass { color: #34d399; border-color: #065f46; background: #062e22; }
+    h1 { font-size: 2.25rem; letter-spacing: -0.02em; margin-bottom: 0.5rem; }
+    .subtitle { color: var(--muted); max-width: 760px; margin: 0 auto 1.5rem; font-size: 1.05rem; }
+    .nav-links { display: flex; gap: 0.75rem; justify-content: center; flex-wrap: wrap; }
+    .btn {
+      display: inline-block;
+      padding: 0.55rem 1.15rem;
+      border-radius: 6px;
+      font-weight: 600;
+      font-size: 0.9rem;
+      text-decoration: none;
+      transition: 0.15s ease;
+    }
+    .btn-primary { background: var(--accent); color: #0f172a; }
+    .btn-primary:hover { background: #7dd3fc; }
+    .btn-outline { border: 1px solid #334155; color: var(--text); background: #1e293b; }
+    .btn-outline:hover { border-color: var(--accent); }
+    .container { max-width: 1140px; margin: 2.5rem auto; padding: 0 1.25rem; }
+    h2 {
+      font-size: 1.4rem;
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      border-left: 4px solid var(--accent);
+      padding-left: 0.75rem;
+    }
+    .sim-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+      gap: 1.5rem;
+      margin-bottom: 3rem;
+    }
+    .card {
+      background: var(--panel);
+      border: 1px solid var(--panel-border);
+      border-radius: 10px;
+      padding: 1.5rem;
+    }
+    .card h3 { font-size: 1.1rem; margin-bottom: 0.35rem; color: #f3f4f6; }
+    .card p.desc { font-size: 0.88rem; color: var(--muted); margin-bottom: 1.1rem; }
+    .control-group { margin-bottom: 0.9rem; }
+    .control-group label {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.84rem;
+      font-family: var(--mono);
+      margin-bottom: 0.25rem;
+    }
+    input[type="range"] { width: 100%; accent-color: var(--accent); }
+    .status-box {
+      background: #090d14;
+      border: 1px solid #1e293b;
+      border-radius: 8px;
+      padding: 0.9rem;
+      font-family: var(--mono);
+      font-size: 0.82rem;
+      margin-top: 0.85rem;
+    }
+    .status-line { display: flex; justify-content: space-between; margin-bottom: 0.35rem; }
+    .pdu-bytes {
+      display: grid;
+      grid-template-columns: repeat(8, 1fr);
+      gap: 0.35rem;
+      margin-top: 0.65rem;
+      text-align: center;
+    }
+    .pdu-byte {
+      background: #1e293b;
+      border: 1px solid #334155;
+      border-radius: 4px;
+      padding: 0.35rem 0.1rem;
+      font-family: var(--mono);
+      font-size: 0.78rem;
+    }
+    .pdu-byte span { display: block; font-size: 0.62rem; color: var(--muted); }
+    .repo-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 1.25rem;
+    }
+    .repo-card {
+      background: var(--panel);
+      border: 1px solid var(--panel-border);
+      border-radius: 10px;
+      padding: 1.35rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+    .repo-card:hover { border-color: #38bdf8; }
+    .repo-title {
+      color: var(--accent);
+      font-family: var(--mono);
+      font-size: 1rem;
+      font-weight: 700;
+      text-decoration: none;
+      margin-bottom: 0.5rem;
+      display: inline-block;
+    }
+    .tag-list { display: flex; flex-wrap: wrap; gap: 0.35rem; margin-top: 0.9rem; }
+    .tag {
+      font-family: var(--mono);
+      font-size: 0.7rem;
+      background: #0f172a;
+      color: #94a3b8;
+      border: 1px solid #1e293b;
+      padding: 0.15rem 0.45rem;
+      border-radius: 4px;
+    }
+    .ring-cells {
+      display: grid;
+      grid-template-columns: repeat(8, 1fr);
+      gap: 0.35rem;
+      margin: 0.85rem 0;
+    }
+    .ring-cell {
+      background: #0f172a;
+      border: 1px solid #1e293b;
+      border-radius: 4px;
+      padding: 0.4rem 0.15rem;
+      text-align: center;
+      font-family: var(--mono);
+      font-size: 0.75rem;
+    }
+    .ring-cell.active { background: #064e3b; border-color: #10b981; color: #a7f3d0; }
+    .btn-row { display: flex; gap: 0.5rem; flex-wrap: wrap; margin-top: 0.5rem; }
+    button.sim-btn {
+      background: #1e293b;
+      color: var(--text);
+      border: 1px solid #334155;
+      padding: 0.4rem 0.75rem;
+      border-radius: 5px;
+      cursor: pointer;
+      font-family: var(--mono);
+      font-size: 0.78rem;
+    }
+    button.sim-btn:hover { border-color: var(--accent); color: var(--accent); }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="badge-row">
+    <span class="pill safety">ISO 26262 ASIL-D</span>
+    <span class="pill">AUTOSAR Classic R4.4</span>
+    <span class="pill">MISRA C:2012</span>
+    <span class="pill">STM32 Cortex-M4F / FreeRTOS</span>
+    <span class="pill pass">CI: 6/6 Passing</span>
+  </div>
+  <h1>Yiğit Çakırdoğan</h1>
+  <p class="subtitle">
+    Embedded Systems &amp; Functional Safety Firmware Engineer — Designing deterministic bare-metal drivers,
+    AUTOSAR Classic BSW/RTE stacks, ISO 26262 safety mechanisms, and zero-copy DMA architectures.
+  </p>
+  <div class="nav-links">
+    <a class="btn btn-primary" href="https://github.com/Yigitcakirdogan" target="_blank">GitHub Profile</a>
+    <a class="btn btn-outline" href="https://github.com/Yigitcakirdogan/autosar-classic-bsw-rte-pedal-voter" target="_blank">AUTOSAR ASIL-D Repo</a>
+    <a class="btn btn-outline" href="https://github.com/Yigitcakirdogan/iso26262-misra-c-safety-library" target="_blank">ISO 26262 Safety Lib</a>
+  </div>
+</header>
+
+<div class="container">
+  <h2>Interactive Firmware &amp; Functional Safety Simulators</h2>
+  <div class="sim-grid">
+
+    <!-- SIMULATOR 1: AUTOSAR ASIL-D 1oo2D Pedal Voter -->
+    <div class="card">
+      <h3>1. AUTOSAR ASIL-D 1oo2D Pedal Voter &amp; E2E Profile 1</h3>
+      <p class="desc">
+        Adjust the dual-slope Hall sensor voltages (`APPS1: 500–4500 mV`, `APPS2: 250–2250 mV`).
+        Divergence &gt; 5.0% (`50 ‰`) or electrical short triggers **Safe Torque Off (`0 Nm`)**.
+      </p>
+
+      <div class="control-group">
+        <label><span>APPS1 Voltage (Primary)</span><span id="lbl-apps1">2500 mV (500 ‰)</span></label>
+        <input type="range" id="rng-apps1" min="200" max="4800" step="25" value="2500" oninput="updateAutosarSim()" />
+      </div>
+
+      <div class="control-group">
+        <label><span>APPS2 Voltage (Redundant 2:1)</span><span id="lbl-apps2">1250 mV (500 ‰)</span></label>
+        <input type="range" id="rng-apps2" min="100" max="2500" step="15" value="1250" oninput="updateAutosarSim()" />
+      </div>
+
+      <div class="btn-row">
+        <button class="sim-btn" onclick="syncPedals(500)">Sync 50% Normal</button>
+        <button class="sim-btn" onclick="injectShortFault()">Inject Short-to-GND (&lt;400mV)</button>
+        <button class="sim-btn" onclick="toggleBrake()" id="btn-brake">Brake Switch: OFF</button>
+      </div>
+
+      <div class="status-box">
+        <div class="status-line"><span>Plausibility Divergence:</span><strong id="st-diff">0 ‰ (OK &le; 50 ‰)</strong></div>
+        <div class="status-line"><span>VCU Safety State:</span><strong id="st-state" style="color:var(--green)">NORMAL_OPERATION</strong></div>
+        <div class="status-line"><span>Voted Torque Request:</span><strong id="st-torque">150 Nm</strong></div>
+        <div style="margin-top:0.55rem; font-size:0.74rem; color:var(--muted);">Outgoing CAN PDU (E2E Profile 1 — SAE J1850 CRC-8 + Alive Counter):</div>
+        <div class="pdu-bytes" id="pdu-view"></div>
+      </div>
+    </div>
+
+    <!-- SIMULATOR 2: STM32 Circular DMA + Lock-Free SPSC Ring Buffer -->
+    <div class="card">
+      <h3>2. STM32 Circular DMA + SPSC Ring Buffer Visualizer</h3>
+      <p class="desc">
+        Demonstrates power-of-two bitwise masking (`index &amp; (N - 1)`) and zero-copy contiguous block
+        transfers between `USART2_RX` DMA ISR (`head`) and the CLI consumer task (`tail`).
+      </p>
+
+      <div class="btn-row">
+        <button class="sim-btn" onclick="dmaIngestBurst('gpio A 5 1\\r')">DMA Burst: "gpio A 5 1\r"</button>
+        <button class="sim-btn" onclick="dmaIngestBurst('status\\r')">DMA Burst: "status\r"</button>
+        <button class="sim-btn" onclick="cliConsumeBytes(4)">Consumer Read (4B)</button>
+        <button class="sim-btn" onclick="cliConsumeAll()">Drain Ring Buffer</button>
+      </div>
+
+      <div class="ring-cells" id="ring-grid"></div>
+
+      <div class="status-box">
+        <div class="status-line"><span>Producer Head / Consumer Tail:</span><strong id="rb-indices">Head: 0 | Tail: 0</strong></div>
+        <div class="status-line"><span>Occupancy / High-Watermark:</span><strong id="rb-water">0 / 15 Bytes (Peak: 0)</strong></div>
+        <div class="status-line"><span>Zero-Copy Contiguous Block:</span><strong id="rb-block">0 Bytes</strong></div>
+      </div>
+    </div>
+
+  </div>
+
+  <h2>Production Firmware &amp; Functional Safety Repositories</h2>
+  <div class="repo-grid">
+    <div class="repo-card">
+      <div>
+        <a class="repo-title" href="https://github.com/Yigitcakirdogan/autosar-classic-bsw-rte-pedal-voter" target="_blank">autosar-classic-bsw-rte-pedal-voter</a>
+        <p class="desc">Complete AUTOSAR Classic R4.4 stack (MCAL, IoHwAb, Dem, WdgM, E2E Profile 1, RTE, ASW) for an ISO 26262 ASIL-D 1oo2D redundant accelerator pedal voter in MISRA C:2012.</p>
+      </div>
+      <div class="tag-list">
+        <span class="tag">AUTOSAR Classic</span><span class="tag">ISO 26262 ASIL-D</span><span class="tag">E2E Profile 1</span><span class="tag">MISRA C:2012</span>
+      </div>
+    </div>
+
+    <div class="repo-card">
+      <div>
+        <a class="repo-title" href="https://github.com/Yigitcakirdogan/iso26262-misra-c-safety-library" target="_blank">iso26262-misra-c-safety-library</a>
+        <p class="desc">ISO 26262-5/6 ASIL-D &amp; IEC 61508 software safety mechanisms: non-destructive windowed March-C- SRAM self-test, inverse variables (SafeVar_u32_t), Control Flow Monitor, and ROM CRC32.</p>
+      </div>
+      <div class="tag-list">
+        <span class="tag">March-C- RAM Test</span><span class="tag">SEU Protection</span><span class="tag">Control Flow Monitor</span><span class="tag">Fault Injection</span>
+      </div>
+    </div>
+
+    <div class="repo-card">
+      <div>
+        <a class="repo-title" href="https://github.com/Yigitcakirdogan/stm32-dma-ringbuffer-uart-cli" target="_blank">stm32-dma-ringbuffer-uart-cli</a>
+        <p class="desc">Zero-copy STM32F4 UART DMA driver with lock-free SPSC ring buffer, hardware IDLE line detection (USART_SR_IDLE), and deterministic static-memory diagnostic CLI shell.</p>
+      </div>
+      <div class="tag-list">
+        <span class="tag">STM32F4</span><span class="tag">Circular DMA</span><span class="tag">Lock-Free SPSC</span><span class="tag">Zero-Malloc</span>
+      </div>
+    </div>
+
+    <div class="repo-card">
+      <div>
+        <a class="repo-title" href="https://github.com/Yigitcakirdogan/freertos-canbus-modbus-gateway" target="_blank">freertos-canbus-modbus-gateway</a>
+        <p class="desc">Deterministic FreeRTOS industrial gateway bridging CAN 2.0B (ISO 11898) and RS-485 Modbus RTU Slave (FC03/04/06/10) with multi-task deadman hardware watchdog supervision.</p>
+      </div>
+      <div class="tag-list">
+        <span class="tag">FreeRTOS</span><span class="tag">CAN 2.0B</span><span class="tag">Modbus RTU</span><span class="tag">Watchdog Supervisor</span>
+      </div>
+    </div>
+
+    <div class="repo-card">
+      <div>
+        <a class="repo-title" href="https://github.com/Yigitcakirdogan/stm32f4-baremetal-hal-drivers" target="_blank">stm32f4-baremetal-hal-drivers</a>
+        <p class="desc">Pure register-level CMSIS peripheral drivers (GPIO BSRR, SPI Master, I2C with 9-clock bus unstick recovery, IWDG), C Reset_Handler startup, and custom CCM-RAM GNU LD linker script.</p>
+      </div>
+      <div class="tag-list">
+        <span class="tag">Bare-Metal CMSIS</span><span class="tag">GNU LD Linker</span><span class="tag">I2C Bus Recovery</span><span class="tag">Cortex-M4F</span>
+      </div>
+    </div>
+
+    <div class="repo-card">
+      <div>
+        <a class="repo-title" href="https://github.com/Yigitcakirdogan/esp32-industrial-iot-telemetry-node" target="_blank">esp32-industrial-iot-telemetry-node</a>
+        <p class="desc">Fault-tolerant ESP32 industrial telemetry node with Median-of-5 EMI impulse filter, 1D Discrete Kalman Filter, exponential backoff FSM, and CRC-32 offline flash ring spooling.</p>
+      </div>
+      <div class="tag-list">
+        <span class="tag">ESP32</span><span class="tag">1D Kalman Filter</span><span class="tag">Median-5 DSP</span><span class="tag">Offline Spool</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  // --- Simulator 1: AUTOSAR ASIL-D Pedal Voter & E2E Profile 1 CRC-8 ---
+  let brakeActive = false;
+  let aliveCounter = 0;
+
+  function crc8SaeJ1850(bytes, startVal) {
+    let crc = startVal;
+    for (let i = 0; i < bytes.length; i++) {
+      crc ^= bytes[i];
+      for (let b = 0; b < 8; b++) {
+        crc = (crc & 0x80) ? (((crc << 1) ^ 0x1D) & 0xFF) : ((crc << 1) & 0xFF);
+      }
+    }
+    return (crc ^ 0xFF) & 0xFF;
+  }
+
+  function scaleMv(mv, zeroMv, fullMv) {
+    if (mv <= zeroMv) return 0;
+    if (mv >= fullMv) return 1000;
+    return Math.floor(((mv - zeroMv) * 1000) / (fullMv - zeroMv));
+  }
+
+  function syncPedals(permille) {
+    document.getElementById('rng-apps1').value = 500 + (permille * 4);
+    document.getElementById('rng-apps2').value = 250 + (permille * 2);
+    brakeActive = false;
+    document.getElementById('btn-brake').textContent = 'Brake Switch: OFF';
+    updateAutosarSim();
+  }
+
+  function injectShortFault() {
+    document.getElementById('rng-apps1').value = 250; // < 400 mV Short-to-GND
+    updateAutosarSim();
+  }
+
+  function toggleBrake() {
+    brakeActive = !brakeActive;
+    document.getElementById('btn-brake').textContent = 'Brake Switch: ' + (brakeActive ? 'ON (Active)' : 'OFF');
+    updateAutosarSim();
+  }
+
+  function updateAutosarSim() {
+    const mv1 = parseInt(document.getElementById('rng-apps1').value, 10);
+    const mv2 = parseInt(document.getElementById('rng-apps2').value, 10);
+    const p1 = scaleMv(mv1, 500, 4500);
+    const p2 = scaleMv(mv2, 250, 2250);
+    const rangeFault = (mv1 < 400 || mv1 > 4600 || mv2 < 200 || mv2 > 2350);
+    const diff = Math.abs(p1 - p2);
+
+    document.getElementById('lbl-apps1').textContent = `${mv1} mV (${p1} ‰)`;
+    document.getElementById('lbl-apps2').textContent = `${mv2} mV (${p2} ‰)`;
+
+    const stDiff = document.getElementById('st-diff');
+    const stState = document.getElementById('st-state');
+    const stTorque = document.getElementById('st-torque');
+
+    let stateCode = 0;
+    let votedPermille = Math.min(p1, p2);
+    let torqueNm = 0;
+
+    if (rangeFault || diff > 50) {
+      stateCode = 2;
+      votedPermille = 0;
+      torqueNm = 0;
+      stDiff.textContent = rangeFault ? `${diff} ‰ (ELECTRICAL RANGE FAULT!)` : `${diff} ‰ (IMPLAUSIBLE > 50 ‰!)`;
+      stDiff.style.color = 'var(--red)';
+      stState.textContent = 'FAULT_SAFE_STATE (Safe Torque Off)';
+      stState.style.color = 'var(--red)';
+    } else if (brakeActive && votedPermille > 150) {
+      stateCode = 1;
+      votedPermille = 0;
+      torqueNm = 0;
+      stDiff.textContent = `${diff} ‰ (Plausible)`;
+      stDiff.style.color = 'var(--green)';
+      stState.textContent = 'BRAKE_OVERRIDE_ACTIVE (BOS)';
+      stState.style.color = 'var(--amber)';
+    } else {
+      stateCode = 0;
+      torqueNm = Math.floor((votedPermille * 300) / 1000);
+      stDiff.textContent = `${diff} ‰ (OK <= 50 ‰)`;
+      stDiff.style.color = 'var(--green)';
+      stState.textContent = 'NORMAL_OPERATION (1oo2D Valid)';
+      stState.style.color = 'var(--green)';
+    }
+
+    stTorque.textContent = `${torqueNm} Nm`;
+
+    const pdu = new Array(8).fill(0);
+    pdu[1] = ((stateCode & 0x0F) << 4) | (aliveCounter & 0x0F);
+    pdu[2] = torqueNm & 0xFF;
+    pdu[3] = (torqueNm >> 8) & 0xFF;
+    pdu[4] = votedPermille & 0xFF;
+    pdu[5] = (votedPermille >> 8) & 0xFF;
+    pdu[6] = (stateCode === 2) ? 0xAA : 0x55;
+    pdu[7] = 0x00;
+
+    const c1 = crc8SaeJ1850([0xA5, 0x01], 0xFF);
+    pdu[0] = crc8SaeJ1850(pdu.slice(1), c1 ^ 0xFF);
+    aliveCounter = (aliveCounter + 1) % 15;
+
+    const labels = ['CRC8', 'ST|CNT', 'TRQ_L', 'TRQ_H', 'PED_L', 'PED_H', 'DIAG', 'RSVD'];
+    const pduView = document.getElementById('pdu-view');
+    pduView.innerHTML = pdu.map((b, idx) =>
+      `<div class="pdu-byte">0x${b.toString(16).toUpperCase().padStart(2,'0')}<span>${labels[idx]}</span></div>`
+    ).join('');
+  }
+
+  // --- Simulator 2: 16-Slot Power-of-Two SPSC Ring Buffer ---
+  const RB_CAP = 16;
+  const RB_MASK = 15;
+  const rbBuf = new Array(RB_CAP).fill('.');
+  let rbHead = 0, rbTail = 0, rbPeak = 0;
+
+  function rbAvail() { return (rbHead - rbTail) & RB_MASK; }
+
+  function dmaIngestBurst(str) {
+    const clean = str.replace('\\r', '\r');
+    for (let i = 0; i < clean.length; i++) {
+      const next = (rbHead + 1) & RB_MASK;
+      if (next === rbTail) break;
+      rbBuf[rbHead] = clean[i] === '\r' ? '\\r' : clean[i];
+      rbHead = next;
+    }
+    if (rbAvail() > rbPeak) rbPeak = rbAvail();
+    renderRingBuffer();
+  }
+
+  function cliConsumeBytes(count) {
+    for (let i = 0; i < count; i++) {
+      if (rbTail === rbHead) break;
+      rbTail = (rbTail + 1) & RB_MASK;
+    }
+    renderRingBuffer();
+  }
+
+  function cliConsumeAll() {
+    rbTail = rbHead;
+    renderRingBuffer();
+  }
+
+  function isSlotOccupied(idx) {
+    if (rbHead === rbTail) return false;
+    if (rbHead > rbTail) return idx >= rbTail && idx < rbHead;
+    return idx >= rbTail || idx < rbHead;
+  }
+
+  function renderRingBuffer() {
+    const grid = document.getElementById('ring-grid');
+    let html = '';
+    for (let i = 0; i < RB_CAP; i++) {
+      const occ = isSlotOccupied(i);
+      const ptrs = (i === rbHead && i === rbTail) ? 'H/T' : (i === rbHead ? 'HEAD' : (i === rbTail ? 'TAIL' : `#${i}`));
+      html += `<div class="ring-cell ${occ ? 'active' : ''}">${occ ? rbBuf[i] : '·'}<div style="font-size:0.6rem;color:#94a3b8">${ptrs}</div></div>`;
+    }
+    grid.innerHTML = html;
+    const avail = rbAvail();
+    const contig = (rbHead === rbTail) ? 0 : (rbHead > rbTail ? (rbHead - rbTail) : (RB_CAP - rbTail));
+    document.getElementById('rb-indices').textContent = `Head: ${rbHead} | Tail: ${rbTail}`;
+    document.getElementById('rb-water').textContent = `${avail} / 15 Bytes (Peak: ${rbPeak})`;
+    document.getElementById('rb-block').textContent = `${contig} Contiguous Bytes Ready for DMA TX`;
+  }
+
+  updateAutosarSim();
+  dmaIngestBurst('help\\r');
+</script>
+
+</body>
+</html>
