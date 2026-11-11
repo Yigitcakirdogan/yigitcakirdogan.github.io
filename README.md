@@ -1,5 +1,7 @@
 # Merhaba, ben YiÄŸit Ã‡akÄ±rdoÄŸan ğŸ‘‹
 
+<img src="https://yigitcakirdogan.github.io/yigit-cakirdogan.jpg" alt="YiÄŸit Ã‡akÄ±rdoÄŸan - Bilgisayar MÃ¼hendisi" width="180" align="right" style="border-radius:50%;" />
+
 **Bilgisayar MÃ¼hendisi | GÃ¶mÃ¼lÃ¼ Sistemler (Embedded Systems) UzmanÄ±**
 
 GÃ¶mÃ¼lÃ¼ sistemler, mikrodenetleyiciler (ARM, STM32, ESP32), gerÃ§ek zamanlÄ± iÅŸletim sistemleri (RTOS), donanÄ±m-yazÄ±lÄ±m entegrasyonu ve firmware mimarileri Ã¼zerine Ã§alÄ±ÅŸÄ±yorum.
