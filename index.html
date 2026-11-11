@@ -7,6 +7,7 @@
   <meta name="description" content="Yiğit Çakırdoğan - Bilgisayar Mühendisi ve Gömülü Sistemler (Embedded Systems) geliştiricisi. Kişisel web sitesi, projeler ve iletişim.">
   <meta name="keywords" content="Yiğit Çakırdoğan, Yigit Cakirdogan, Bilgisayar Mühendisi, Gömülü Sistemler, Embedded Systems, C, C++, Firmware, IoT, Hardware">
   <meta name="author" content="Yiğit Çakırdoğan">
+  <meta name="robots" content="index, follow, max-image-preview:large">
   <link rel="canonical" href="https://yigitcakirdogan.github.io/">
 
   <!-- Open Graph / Facebook / LinkedIn -->
@@ -14,13 +15,20 @@
   <meta property="og:title" content="Yiğit Çakırdoğan | Bilgisayar Mühendisi & Gömülü Sistemler">
   <meta property="og:description" content="Yiğit Çakırdoğan - Bilgisayar Mühendisi ve Gömülü Sistemler Uzmanı.">
   <meta property="og:url" content="https://yigitcakirdogan.github.io/">
+  <meta property="og:image" content="https://yigitcakirdogan.github.io/yigit-cakirdogan.jpg">
+  <meta property="og:image:alt" content="Yiğit Çakırdoğan - Bilgisayar Mühendisi">
+  <meta property="profile:first_name" content="Yiğit">
+  <meta property="profile:last_name" content="Çakırdoğan">
+  <meta property="profile:username" content="Yigitcakirdogan">
 
   <!-- Twitter -->
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Yiğit Çakırdoğan | Bilgisayar Mühendisi">
   <meta name="twitter:description" content="Yiğit Çakırdoğan - Bilgisayar Mühendisi ve Gömülü Sistemler Uzmanı.">
+  <meta name="twitter:image" content="https://yigitcakirdogan.github.io/yigit-cakirdogan.jpg">
+  <meta name="twitter:image:alt" content="Yiğit Çakırdoğan">
 
-  <!-- Schema.org JSON-LD (Google Bilgi Paneli ve Arama Algoritması İçin Kritik) -->
+  <!-- Schema.org JSON-LD (Google Bilgi Paneli ve Google Görseller İçin Kritik) -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -28,8 +36,15 @@
     "name": "Yiğit Çakırdoğan",
     "alternateName": ["Yigit Cakirdogan", "yigitrofi"],
     "jobTitle": "Bilgisayar Mühendisi (Computer Engineer)",
-    "description": "Bilgisayar Mühendisi ve Gömülü Sistemler (Embedded Systems) geliştiricisi.",
+    "description": "Yiğit Çakırdoğan - Bilgisayar Mühendisi ve Gömülü Sistemler (Embedded Systems) geliştiricisi.",
     "url": "https://yigitcakirdogan.github.io/",
+    "image": {
+      "@type": "ImageObject",
+      "url": "https://yigitcakirdogan.github.io/yigit-cakirdogan.jpg",
+      "contentUrl": "https://yigitcakirdogan.github.io/yigit-cakirdogan.jpg",
+      "caption": "Yiğit Çakırdoğan - Bilgisayar Mühendisi ve Gömülü Sistemler Uzmanı",
+      "name": "Yiğit Çakırdoğan"
+    },
     "sameAs": [
       "https://github.com/Yigitcakirdogan",
       "https://www.instagram.com/yigitrofi/"
@@ -81,27 +96,38 @@
       text-align: center;
       margin-bottom: 2.5rem;
     }
-    .avatar-wrapper {
-      width: 110px;
-      height: 110px;
+    .avatar-figure {
       margin: 0 auto 1.5rem auto;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .avatar-wrapper {
+      width: 140px;
+      height: 140px;
       border-radius: 50%;
       background: linear-gradient(135deg, #00d2ff, #3a7bd5);
       padding: 3px;
       box-shadow: 0 0 25px var(--accent-glow);
+      overflow: hidden;
     }
-    .avatar {
+    .avatar-img {
       width: 100%;
       height: 100%;
       border-radius: 50%;
+      object-fit: cover;
+      display: block;
       background: var(--card-bg);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 2.5rem;
-      font-weight: 700;
-      color: var(--accent);
-      user-select: none;
+    }
+    .sr-only {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      border: 0;
     }
     h1 {
       font-size: 2.4rem;
@@ -193,9 +219,20 @@
 
   <main class="container">
     <header>
-      <div class="avatar-wrapper">
-        <div class="avatar">YÇ</div>
-      </div>
+      <figure class="avatar-figure" itemscope itemtype="https://schema.org/ImageObject">
+        <div class="avatar-wrapper">
+          <img
+            src="/yigit-cakirdogan.jpg"
+            alt="Yiğit Çakırdoğan - Bilgisayar Mühendisi ve Gömülü Sistemler Uzmanı"
+            title="Yiğit Çakırdoğan"
+            width="460"
+            height="460"
+            class="avatar-img"
+            itemprop="contentUrl"
+          >
+        </div>
+        <figcaption class="sr-only" itemprop="caption">Yiğit Çakırdoğan - Bilgisayar Mühendisi ve Gömülü Sistemler Uzmanı</figcaption>
+      </figure>
       <h1>Yiğit Çakırdoğan</h1>
       <p class="subtitle">Bilgisayar Mühendisi | Gömülü Sistemler Uzmanı</p>
       <p class="bio">
