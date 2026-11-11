@@ -1,9 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
   <url>
     <loc>https://yigitcakirdogan.github.io/</loc>
-    <lastmod>2026-11-10</lastmod>
-    <changefreq>monthly</changefreq>
+    <lastmod>2026-11-11</lastmod>
+    <changefreq>weekly</changefreq>
     <priority>1.0</priority>
+    <image:image>
+      <image:loc>https://yigitcakirdogan.github.io/yigit-cakirdogan.jpg</image:loc>
+      <image:title>Yiğit Çakırdoğan</image:title>
+      <image:caption>Yiğit Çakırdoğan - Bilgisayar Mühendisi ve Gömülü Sistemler Uzmanı</image:caption>
+    </image:image>
   </url>
 </urlset>
